@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+CURRENT_DIR=$(pwd)
+USER_HOME=$(eval echo ~$(logname))
+
+# define the individual environment variables
+DEV_LD_LIBRARY_PATH="LD_LIBRARY_PATH=$CURRENT_DIR:$LD_LIBRARY_PATH"
+DEV_LUA_BIN="PATH=$USER_HOME/local/luajit-05JUN2024/bin:$PATH"
+
+# combine the environment variables into the DEVFLAGS variable
+DEVFLAGS="$DEV_LD_LIBRARY_PATH $DEV_LUA_BIN"
+
+sudo $DEVFLAGS bash -c '"$@"' bash "$@"
